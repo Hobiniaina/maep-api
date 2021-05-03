@@ -1,16 +1,11 @@
 package mg.maep.api.models;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -46,9 +41,9 @@ public class Individu {
 	@Column(name = "sexe")
 	private String sexe;
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "utilisateur_status", joinColumns = @JoinColumn(name = "id_utilisateur"), inverseJoinColumns = @JoinColumn(name = "id_status"))
-	private Set<Status> roles = new HashSet<>();
+	@ManyToOne
+	@JoinColumn(name = "idStatus")
+	private Status status;
 
 	@Column(name = "national")
 	private String national;
@@ -141,12 +136,12 @@ public class Individu {
 		this.sexe = sexe;
 	}
 
-	public Set<Status> getRoles() {
-		return roles;
+	public Status getStatus() {
+		return status;
 	}
 
-	public void setRoles(Set<Status> roles) {
-		this.roles = roles;
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	public String getNational() {

@@ -16,7 +16,7 @@ public class Status {
 	private int idStatus;
 
 	@Column(name = "libelle_status")
-	private ERole name;
+	private String libelleStatus;
 
 	public Status() {
 		super();
@@ -30,12 +30,12 @@ public class Status {
 		this.idStatus = idStatus;
 	}
 
-	public ERole getName() {
-		return name;
+	public String getLibelleStatus() {
+		return libelleStatus;
 	}
 
-	public void setName(ERole name) {
-		this.name = name;
+	public void setLibelleStatus(String libelleStatus) {
+		this.libelleStatus = libelleStatus;
 	}
 
 }
