@@ -2,6 +2,8 @@ package mg.maep.api.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -10,8 +12,9 @@ import javax.persistence.Table;
 public class Adresse {
 
 	@Id
-	@Column(name = "code_adr", length = 50, unique = true)
-	private String codeAdresse;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "code_adr")
+	private int codeAdresse;
 
 	@Column(name = "lot", length = 100)
 	private String lot;
@@ -38,11 +41,11 @@ public class Adresse {
 		super();
 	}
 
-	public String getCodeAdresse() {
+	public int getCodeAdresse() {
 		return codeAdresse;
 	}
 
-	public void setCodeAdresse(String codeAdresse) {
+	public void setCodeAdresse(int codeAdresse) {
 		this.codeAdresse = codeAdresse;
 	}
 
