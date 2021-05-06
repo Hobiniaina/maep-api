@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import mg.maep.api.config.JwtTokenUtil;
@@ -20,7 +19,7 @@ import mg.maep.api.services.UtilisateurServices;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/token")
+@RequestMapping("/api/token")
 public class AuthenticationController {
 
 	@Autowired
@@ -32,7 +31,7 @@ public class AuthenticationController {
 	@Autowired
 	UtilisateurServices services;
 
-	@PostMapping(value = "/generate-token")
+	@PostMapping(value = "/connecter")
 	public ApiResponse<AuthToken> register(@RequestBody LoginUser loginUser) throws AuthenticationException {
 
 		authenticationManager.authenticate(

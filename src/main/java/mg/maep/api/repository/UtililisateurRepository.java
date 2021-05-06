@@ -7,6 +7,9 @@ import mg.maep.api.models.Utilisateur;
 
 public interface UtililisateurRepository extends JpaRepository<Utilisateur, String> {
 
+	@Query(value = "select nextval('\"public\".seq_user')", nativeQuery = true)
+	int seqUser();
+
 	@Query(value = "select u from Utilisateur u where u.individu.matricule = ?1")
 	Utilisateur findByMatricule(String matricule);
 }

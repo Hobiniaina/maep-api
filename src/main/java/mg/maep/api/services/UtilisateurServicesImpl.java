@@ -1,6 +1,8 @@
 package mg.maep.api.services;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import mg.maep.api.models.Individu;
 import mg.maep.api.models.Utilisateur;
+import mg.maep.api.repository.IndividuRepository;
 import mg.maep.api.repository.UtililisateurRepository;
 
 @Service(value = "utilisateurServices")
@@ -22,11 +26,22 @@ public class UtilisateurServicesImpl implements UserDetailsService, UtilisateurS
 	@Autowired
 	UtililisateurRepository repository;
 
+	@Autowired
+	IndividuRepository indRepository;
+
 	int max = 15;
 
 	@Override
 	public Utilisateur save(Utilisateur entity) {
 		// TODO Auto-generated method stub
+		Date date = new Date();
+		SimpleDateFormat formater = new SimpleDateFormat("ddMMyy");
+		Individu individu = entity.getIndividu();
+		individu.setMatricule(
+				"MAT/" + formater.format(date) + "/" + String.format("%03d", indRepository.seqIndividu()));
+		entity.setIdUtilisateur(String.format("%03d", repository.seqUser()));
+		indRepository.save(individu);
+		entity.setIndividu(individu);
 		return repository.save(entity);
 	}
 
