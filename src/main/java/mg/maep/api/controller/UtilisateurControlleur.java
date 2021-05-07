@@ -61,16 +61,17 @@ public class UtilisateurControlleur {
 		return ResponseEntity.ok(new JwtResponse(jwt, "", userDetails.getUsername(), roles));
 	}
 
-	@PostMapping(value = "/saveUtilisateur")
+	@PostMapping(value = "/inscrire")
 	public ApiResponse<Utilisateur> saveUtilisateur(@RequestBody Utilisateur utilisateur) {
 		try {
+			Utilisateur user = new Utilisateur();
 			utilisateur.setPassword(encoder.encode(utilisateur.getPassword()));
-			Utilisateur user = services.save(utilisateur);
+			user = services.save(utilisateur);
 			return new ApiResponse<>(200, "success", user);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			return new ApiResponse<>(500, "Erreur", "No Result");
+			return new ApiResponse<>(500, "Erreur d'inscription", "No Result");
 		}
 
 	}

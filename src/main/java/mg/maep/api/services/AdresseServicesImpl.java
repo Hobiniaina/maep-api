@@ -20,7 +20,6 @@ public class AdresseServicesImpl implements AdresseServices {
 
 	@Override
 	public Adresse save(Adresse entity) {
-		// TODO Auto-generated method stub
 		return repository.save(entity);
 	}
 
