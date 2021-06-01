@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-		authenticationManagerBuilder.inMemoryAuthentication().withUser("maep").password("maep1234").roles("ADMIN");
+//		authenticationManagerBuilder.inMemoryAuthentication().withUser("maep").password("maep1234").roles("ADMIN");
 		authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
 

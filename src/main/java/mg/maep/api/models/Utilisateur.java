@@ -25,7 +25,7 @@ public class Utilisateur {
 	@JoinColumn(name = "matricule")
 	private Individu individu;
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "utilisateur_status", joinColumns = @JoinColumn(name = "utilisateur_id"), inverseJoinColumns = @JoinColumn(name = "status_id"))
 	private Set<Status> roles = new HashSet<>();
 

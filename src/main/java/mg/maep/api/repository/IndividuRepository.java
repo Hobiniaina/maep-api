@@ -9,4 +9,6 @@ public interface IndividuRepository extends JpaRepository<Individu, String> {
 
 	@Query(value = "select nextval('\"public\".seq_individu')", nativeQuery = true)
 	int seqIndividu();
+	
+	Individu findByMatricule(String matricule);
 }
