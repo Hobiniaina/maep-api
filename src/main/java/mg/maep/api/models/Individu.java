@@ -60,6 +60,10 @@ public class Individu {
 	@JoinColumn(name = "code_adr")
 	private Adresse adresse;
 
+	@ManyToOne
+	@JoinColumn(name = "idImage")
+	private ImgIndividu imgIndividu;
+
 	public Individu() {
 		super();
 	}
@@ -174,6 +178,14 @@ public class Individu {
 
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
+	}
+
+	public ImgIndividu getImgIndividu() {
+		return imgIndividu;
+	}
+
+	public void setImgIndividu(ImgIndividu imgIndividu) {
+		this.imgIndividu = imgIndividu;
 	}
 
 }

@@ -37,8 +37,7 @@ public class UtilisateurServicesImpl implements UserDetailsService, UtilisateurS
 		Date date = new Date();
 		SimpleDateFormat formater = new SimpleDateFormat("ddMMyy");
 		Individu individu = entity.getIndividu();
-		individu.setMatricule(
-				"MAT/" + formater.format(date) + "/" + String.format("%03d", indRepository.seqIndividu()));
+		individu.setMatricule("MAT" + formater.format(date) + String.format("%03d", indRepository.seqIndividu()));
 		entity.setIdUtilisateur(String.format("%03d", repository.seqUser()));
 		indRepository.save(individu);
 		entity.setIndividu(individu);

@@ -24,14 +24,20 @@ import org.springframework.web.bind.annotation.RestController;
 import mg.maep.api.config.JwtResponse;
 import mg.maep.api.config.JwtUtils;
 import mg.maep.api.config.UserDetailsImpl;
+import mg.maep.api.models.Adresse;
 import mg.maep.api.models.ApiResponse;
 import mg.maep.api.models.Individu;
 import mg.maep.api.models.LoginUser;
+import mg.maep.api.models.ModePaiement;
+import mg.maep.api.models.SecteurActivite;
 import mg.maep.api.models.Status;
 import mg.maep.api.models.Utilisateur;
 import mg.maep.api.repository.IndividuRepository;
 import mg.maep.api.repository.StatusRepository;
 import mg.maep.api.repository.UtililisateurRepository;
+import mg.maep.api.services.AdresseServices;
+import mg.maep.api.services.ModePaiementServices;
+import mg.maep.api.services.SecteurActiviteServices;
 import mg.maep.api.services.StatusServices;
 import mg.maep.api.services.UtilisateurServices;
 
@@ -60,9 +66,18 @@ public class UtilisateurControlleur {
 
 	@Autowired
 	IndividuRepository indivRepository;
-	
+
 	@Autowired
 	StatusServices statusServices;
+
+	@Autowired
+	ModePaiementServices mdpservices;
+
+	@Autowired
+	SecteurActiviteServices secteurServices;
+
+	@Autowired
+	AdresseServices adresseServices;
 
 	@PostMapping("/connecter")
 	public ResponseEntity<?> authenticateUser(@RequestBody LoginUser loginRequest) {
@@ -98,7 +113,7 @@ public class UtilisateurControlleur {
 		}
 
 	}
-	
+
 	@GetMapping(value = "/findAllStatus")
 	public ResponseEntity<Object> listeAllStatus() {
 		try {
@@ -109,7 +124,7 @@ public class UtilisateurControlleur {
 			return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@PostMapping(value = "/saveStatus")
 	public ResponseEntity<Object> enregistreStatus(@Validated @RequestBody Status status) {
 		try {
@@ -121,4 +136,34 @@ public class UtilisateurControlleur {
 		}
 	}
 
+	@GetMapping(value = "/allModePaiement")
+	public ResponseEntity<Object> liste() {
+		try {
+			List<ModePaiement> modePaiement = mdpservices.listeAll();
+			return new ResponseEntity<>(modePaiement, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@GetMapping(value = "/allSecteur")
+	public ResponseEntity<Object> listeSecteur() {
+		try {
+			List<SecteurActivite> activite = secteurServices.listeAll();
+			return new ResponseEntity<>(activite, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@GetMapping(value = "/allAdresse")
+	public ResponseEntity<Object> adresseList() {
+		try {
+			List<Adresse> adresse = adresseServices.listeAll();
+			return new ResponseEntity<>(adresse, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
+		}
+	}
 }
