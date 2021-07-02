@@ -21,8 +21,7 @@ public interface UtililisateurRepository extends JpaRepository<Utilisateur, Stri
 	@Query("select case when (count(u) > 0) then true else false end from Utilisateur u where u.individu.matricule = ?1")
 	boolean existMatricule(String matricule);
 
-	@Query(value = "select distinct substring (cast(id_commune as varchar),3,4) from public.commune where id_commune = ?1\r\n"
-			+ "", nativeQuery = true)
+	@Query(value = "select code_commune from public.commune where id_commune = ?1", nativeQuery = true)
 	String prendIdCommune(int idCommune);
 
 }

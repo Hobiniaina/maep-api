@@ -27,7 +27,7 @@ public class SwaggerConfig {
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo())
 				.securityContexts(Arrays.asList(securityContext())).securitySchemes(Arrays.asList(apiKey())).select()
-				.apis(RequestHandlerSelectors.any())
+				.apis(RequestHandlerSelectors.basePackage("mg.maep.api.controller"))
 				.paths(PathSelectors.any())
 				.build();
 	}
@@ -40,7 +40,7 @@ public class SwaggerConfig {
 	}
 
 	private ApiKey apiKey() {
-		return new ApiKey("authkey", "Authorization", "header");
+		return new ApiKey("JWT", "Authorization", "header");
 	}
 
 	private SecurityContext securityContext() {

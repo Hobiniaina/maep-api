@@ -25,6 +25,8 @@ public class Commune implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "idDistrict")
 	private District district;
+	@Column(name = "code_commune", length = 10)
+	private String codeCommune;
 
 	public Commune() {
 		super();
@@ -56,6 +58,14 @@ public class Commune implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getCodeCommune() {
+		return codeCommune;
+	}
+
+	public void setCodeCommune(String codeCommune) {
+		this.codeCommune = codeCommune;
 	}
 
 }

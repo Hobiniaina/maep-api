@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import mg.maep.api.models.Commune;
 import mg.maep.api.models.Fokontany;
 import mg.maep.api.services.CommuneServices;
@@ -22,6 +24,7 @@ import mg.maep.api.services.FokontanyServices;
 @RestController
 @CrossOrigin
 @RequestMapping("/api/adresse")
+@Api( tags = "Adresse")
 public class AdresseControlleur {
 
 	@Autowired
@@ -30,6 +33,7 @@ public class AdresseControlleur {
 	@Autowired
 	CommuneServices communeService;
 
+	@ApiOperation(value = "Prendre Tout les listes Fokontany")
 	@GetMapping(value = "/prendListeFokontany")
 	public ResponseEntity<Object> listeFokontany() {
 		try {
@@ -50,6 +54,7 @@ public class AdresseControlleur {
 		}
 	}
 
+	@ApiOperation(value = "Prendre Tout les Commune, District, Region, Province par Fokontany")
 	@GetMapping(value = "/prendCommuneDistrictRegionProvinceByFokontany/{idFokontany}")
 	public ResponseEntity<Object> prendCommuneByFokontany(@PathVariable int idFokontany) {
 		try {
