@@ -11,15 +11,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import mg.maep.api.models.Adresse;
 import mg.maep.api.models.Commune;
 import mg.maep.api.models.Fokontany;
-import mg.maep.api.services.AdresseServices;
 import mg.maep.api.services.CommuneServices;
 import mg.maep.api.services.FokontanyServices;
 
@@ -34,12 +30,9 @@ public class AdresseControlleur {
 	@Autowired
 	CommuneServices communeService;
 
-	@Autowired
-	AdresseServices adresseServices;
-
 	@GetMapping(value = "/prendListeFokontany")
 	public ResponseEntity<Object> listeFokontany() {
-		try {
+		try {if
 			List<Map<String, String>> listMap = new ArrayList<Map<String, String>>();
 			List<Object> liste = fokontanyServices.prendListeFokontany();
 			for (int i = 0; i < liste.size(); i++) {
@@ -69,13 +62,4 @@ public class AdresseControlleur {
 		}
 	}
 
-	@PostMapping(value = "/saveAdresse")
-	public ResponseEntity<Object> saveAdresse(@RequestBody Adresse adresse) {
-		try {
-			return new ResponseEntity<>(adresseServices.save(adresse), HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
-		}
-	}
 }

@@ -2,7 +2,6 @@ package mg.maep.api.services;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,11 +32,11 @@ public class UtilisateurServicesImpl implements UserDetailsService, UtilisateurS
 
 	@Override
 	public Utilisateur save(Utilisateur entity) {
-		// TODO Auto-generated method stub
-		Date date = new Date();
 		SimpleDateFormat formater = new SimpleDateFormat("ddMMyy");
 		Individu individu = entity.getIndividu();
-		individu.setMatricule(formater.format(date) + String.format("%03d", indRepository.seqIndividu()));
+		individu.setMatricule(formater.format(entity.getIndividu().getDateNaiss())
+				+ repository.prendIdCommune(entity.getIndividu().getCommune().getIdCommune())
+				+ String.format("%04d", indRepository.seqIndividu()));
 		entity.setIdUtilisateur(String.format("%03d", repository.seqUser()));
 		indRepository.save(individu);
 		entity.setIndividu(individu);
