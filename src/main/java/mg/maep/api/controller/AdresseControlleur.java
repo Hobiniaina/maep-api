@@ -32,7 +32,7 @@ public class AdresseControlleur {
 
 	@GetMapping(value = "/prendListeFokontany")
 	public ResponseEntity<Object> listeFokontany() {
-		try {if
+		try {
 			List<Map<String, String>> listMap = new ArrayList<Map<String, String>>();
 			List<Object> liste = fokontanyServices.prendListeFokontany();
 			for (int i = 0; i < liste.size(); i++) {
