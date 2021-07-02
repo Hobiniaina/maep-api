@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,26 +18,28 @@ public class Adresse {
 	@Column(name = "code_adr")
 	private int codeAdresse;
 
-	@Column(name = "lot", length = 100)
-	private String lot;
-
 	@Column(name = "code_postal")
 	private String codePostal;
 
-	@Column(name = "fokontany")
-	private String fokontany;
+	@ManyToOne
+	@JoinColumn(name = "fokontany")
+	private Fokontany fokontany;
 
-	@Column(name = "commune")
-	private String commune;
+	@ManyToOne
+	@JoinColumn(name = "commune")
+	private Commune commune;
 
-	@Column(name = "district")
-	private String district;
+	@ManyToOne
+	@JoinColumn(name = "district")
+	private District district;
 
-	@Column(name = "region")
-	private String region;
+	@ManyToOne
+	@JoinColumn(name = "region")
+	private Region region;
 
-	@Column(name = "province")
-	private String province;
+	@ManyToOne
+	@JoinColumn(name = "province")
+	private Province province;
 
 	public Adresse() {
 		super();
@@ -49,14 +53,6 @@ public class Adresse {
 		this.codeAdresse = codeAdresse;
 	}
 
-	public String getLot() {
-		return lot;
-	}
-
-	public void setLot(String lot) {
-		this.lot = lot;
-	}
-
 	public String getCodePostal() {
 		return codePostal;
 	}
@@ -65,43 +61,43 @@ public class Adresse {
 		this.codePostal = codePostal;
 	}
 
-	public String getFokontany() {
+	public Fokontany getFokontany() {
 		return fokontany;
 	}
 
-	public void setFokontany(String fokontany) {
+	public void setFokontany(Fokontany fokontany) {
 		this.fokontany = fokontany;
 	}
 
-	public String getCommune() {
+	public Commune getCommune() {
 		return commune;
 	}
 
-	public void setCommune(String commune) {
+	public void setCommune(Commune commune) {
 		this.commune = commune;
 	}
 
-	public String getDistrict() {
+	public District getDistrict() {
 		return district;
 	}
 
-	public void setDistrict(String district) {
+	public void setDistrict(District district) {
 		this.district = district;
 	}
 
-	public String getRegion() {
+	public Region getRegion() {
 		return region;
 	}
 
-	public void setRegion(String region) {
+	public void setRegion(Region region) {
 		this.region = region;
 	}
 
-	public String getProvince() {
+	public Province getProvince() {
 		return province;
 	}
 
-	public void setProvince(String province) {
+	public void setProvince(Province province) {
 		this.province = province;
 	}
 
