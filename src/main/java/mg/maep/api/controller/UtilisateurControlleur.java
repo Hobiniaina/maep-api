@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,12 +29,14 @@ import mg.maep.api.models.ApiResponse;
 import mg.maep.api.models.Individu;
 import mg.maep.api.models.LoginUser;
 import mg.maep.api.models.ModePaiement;
+import mg.maep.api.models.ParamIndividu;
 import mg.maep.api.models.SecteurActivite;
 import mg.maep.api.models.Status;
 import mg.maep.api.models.Utilisateur;
 import mg.maep.api.repository.IndividuRepository;
 import mg.maep.api.repository.StatusRepository;
 import mg.maep.api.repository.UtililisateurRepository;
+import mg.maep.api.services.IndividuServices;
 import mg.maep.api.services.ModePaiementServices;
 import mg.maep.api.services.SecteurActiviteServices;
 import mg.maep.api.services.StatusServices;
@@ -73,6 +76,9 @@ public class UtilisateurControlleur {
 
 	@Autowired
 	SecteurActiviteServices secteurServices;
+
+	@Autowired
+	IndividuServices indivServices;
 
 	@PostMapping("/connecter")
 	public ResponseEntity<?> authenticateUser(@RequestBody LoginUser loginRequest) {
@@ -147,6 +153,18 @@ public class UtilisateurControlleur {
 		try {
 			List<SecteurActivite> activite = secteurServices.listeAll();
 			return new ResponseEntity<>(activite, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@GetMapping(value = "/prendIndivByStatus/{idStatus}")
+	public ResponseEntity<Object> getIndividuByStatus(@PathVariable int idStatus) {
+		try {
+			Individu individu = indivServices.getIndividuByStatus(idStatus);
+			ParamIndividu paramIndividu = new ParamIndividu();
+			paramIndividu.setMatricule(individu.getMatricule());
+			return new ResponseEntity<>(individu, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
 		}

@@ -67,4 +67,10 @@ public class IndividuServicesImpl implements IndividuServices {
 		return 0;
 	}
 
+	@Override
+	public Individu getIndividuByStatus(int idStatus) {
+		// TODO Auto-generated method stub
+		return repository.prendIndividuByStatus(idStatus);
+	}
+
 }
